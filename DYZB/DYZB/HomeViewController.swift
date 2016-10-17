@@ -27,11 +27,16 @@ class HomeViewController: UIViewController {
     }
     
     private func setNavigationBar(){
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "logo"), for: .normal)
-        btn.sizeToFit()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView:btn)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(imageName: "logo")
+        
+        let size = CGSize(width: 40, height: 40)
+        
+        let his = UIBarButtonItem(imageName: "image_my_history", highImage: "Image_my_history_click", size: size)
+        let scan = UIBarButtonItem(imageName: "Image_scan", highImage: "Image_scan_click", size: size)
+        let search = UIBarButtonItem(imageName: "btn_search", highImage: "btn_search_clicked", size: size)
+        
+        navigationItem.rightBarButtonItems = [his,scan,search]
     }
     
 
