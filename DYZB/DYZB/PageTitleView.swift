@@ -79,7 +79,9 @@ extension PageTitleView {
         
         scrollView.addSubview(scrollLine)
         
-        guard let fristLabel = titleLabels.first else{ return }
+        guard let fristLabel = titleLabels.first else{
+            print("不在setupLabels里增加titleLabels.append(label)就执行此方法")
+            return }
 //        scrollLine.addSubview(buttonline)
         scrollLine.frame = CGRect(x: fristLabel.frame.origin.x, y: frame.height - kScrollLineH, width:fristLabel.frame.width , height: kScrollLineH)
         
