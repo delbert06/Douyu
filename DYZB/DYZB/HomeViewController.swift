@@ -8,11 +8,27 @@
 
 import UIKit
 
+private let ktitleViewH : CGFloat = 40
+
 class HomeViewController: UIViewController {
+    
+    private lazy var pageTitleView:PageTitleView = {
+//        let titleFrame = CGRect(x: 0, y: kScreenH + sNavigationBarH, width: kScreenW, height: ktitleViewH)
+        let titleFrame = CGRect(x: 0, y: kStautusBarH + sNavigationBarH, width: kScreenW, height: ktitleViewH)
+        let titles = ["推荐","游戏","娱乐","趣玩"]
+        let titleView = PageTitleView(frame: titleFrame, titles: titles)
+//        titleView.backgroundColor = UIColor.purple
+        return titleView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
+        
+        view.addSubview(pageTitleView)
+        
+        automaticallyAdjustsScrollViewInsets = false
 
         // Do any additional setup after loading the view.
     }
