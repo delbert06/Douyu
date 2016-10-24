@@ -12,34 +12,55 @@ private let ktitleViewH : CGFloat = 40
 
 class HomeViewController: UIViewController {
     
-    private lazy var pageTitleView:PageTitleView = {
-//        let titleFrame = CGRect(x: 0, y: kScreenH + sNavigationBarH, width: kScreenW, height: ktitleViewH)
-        let titleFrame = CGRect(x: 0, y: kStautusBarH + sNavigationBarH, width: kScreenW, height: ktitleViewH)
+    //MARK: -懒加载属性
+     lazy var pageTitleView:PageTitleView = {[weak self] in
+        let titleFrame = CGRect(x: 0, y: kStautusBarH + kNavigationBarH, width: kScreenW, height: ktitleViewH)
         let titles = ["推荐","游戏","娱乐","趣玩"]
         let titleView = PageTitleView(frame: titleFrame, titles: titles)
-//        titleView.backgroundColor = UIColor.purple
         return titleView
+    }()
+    
+     lazy var pageContentView:PageContentView = {
+        let contentH = kScreenH - kStautusBarH - kNavigationBarH - ktitleViewH - kTabbarH
+        let contentFrame = CGRect(x: 0, y: kStautusBarH + kNavigationBarH + ktitleViewH, width: kScreenW, height: contentH)
+        
+        var childVCs = [UIViewController]()
+        
+        for _ in 0..<4 {
+            let vc = UIViewController()
+            vc.view.backgroundColor = UIColor(r: CGFloat(arc4random_uniform(255)), g: CGFloat(arc4random_uniform(255)), b: CGFloat(arc4random_uniform(255)))
+            childVCs.append(vc)
+        }
+        
+        let contentView = PageContentView(frame: contentFrame, childVCs: childVCs, parentVC: self)
+        
+        return contentView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
-        
-        view.addSubview(pageTitleView)
-        
-        automaticallyAdjustsScrollViewInsets = false
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
     
-    private func setupUI(){
+    //MARK: - 设置UI界面
+    extension HomeViewController{
+    func setupUI(){
+        //不需要调整UIScrollView的内边距
+        automaticallyAdjustsScrollViewInsets = false
+        
         setNavigationBar()
+        
+        view.addSubview(pageTitleView)
+        
+        view.addSubview(pageContentView)
     }
     
     private func setNavigationBar(){
@@ -54,16 +75,5 @@ class HomeViewController: UIViewController {
         
         navigationItem.rightBarButtonItems = [his,scan,search]
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+

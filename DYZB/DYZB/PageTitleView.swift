@@ -11,8 +11,11 @@ import UIKit
 let kScrollLineH:CGFloat = 2
 
 class PageTitleView: UIView {
+    
+    //MARK: - 定义属性
      var titles : [String]
     
+    //MARK: - 懒加载属性
     lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.scrollsToTop = false
@@ -24,12 +27,12 @@ class PageTitleView: UIView {
     lazy var scrollLine:UIView = {
         let scrollLine = UIView()
         scrollLine.backgroundColor = UIColor.orange
-        print("123")
         return scrollLine
     }()
 
     lazy var titleLabels:[UILabel] = [UILabel]()
     
+    //MARK: - 构造函数
     init(frame : CGRect,titles : [String]) {
         self.titles = titles
         
