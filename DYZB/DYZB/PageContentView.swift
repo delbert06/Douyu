@@ -88,6 +88,6 @@ extension PageContentView : UICollectionViewDataSource {
 extension PageContentView{
     func setCurrentIndex(currnet: Int ){
         let offsetX = CGFloat(currnet) * collectionView.frame.width
-        collectionView.setContentOffset(CGPoint(x : offsetX, y : 0), animated: false)
+        collectionView.setContentOffset(CGPoint(x : offsetX, y : 0), animated: true)
     }
 }
