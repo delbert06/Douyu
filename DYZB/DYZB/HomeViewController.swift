@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
         let titleFrame = CGRect(x: 0, y: kStautusBarH + kNavigationBarH, width: kScreenW, height: ktitleViewH)
         let titles = ["推荐","游戏","娱乐","趣玩"]
         let titleView = PageTitleView(frame: titleFrame, titles: titles)
+        titleView.delegate = self
         return titleView
     }()
     
@@ -74,6 +75,14 @@ class HomeViewController: UIViewController {
         let search = UIBarButtonItem(imageName: "btn_search", highImage: "btn_search_clicked", size: size)
         
         navigationItem.rightBarButtonItems = [his,scan,search]
+    }
+}
+
+
+//MARK: - 遵守PageTitleView协议
+extension HomeViewController:PageTitleViewDelegate{
+    func pageTitle(titleView: PageTitleView, selectedIndex Index: Int) {
+        pageContentView.setCurrentIndex(currnet: Index)
     }
 }
 
